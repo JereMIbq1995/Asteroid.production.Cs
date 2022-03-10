@@ -260,7 +260,7 @@ namespace genie.services.raylib {
 
                 Raylib.DrawTexturePro(texture, new Rectangle(0,0,texture.width, texture.height),
                                     new Rectangle(center.x, center.y, frameWidth, frameHeight),
-                                    new System.Numerics.Vector2(frameWidth/2, frameWidth/2),
+                                    new System.Numerics.Vector2(frameWidth/2, frameHeight/2),
                                     actor.GetRotation(), new Raylib_cs.Color(255,255,255,255));
                 
                 if (actor is AnimatedActor) {
