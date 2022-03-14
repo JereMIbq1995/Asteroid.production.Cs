@@ -55,10 +55,15 @@ namespace asteroid
             // Create the player
             Ship ship = new Ship("./asteroid/assets/spaceship/spaceship_yellow.png", 70, 50, W_SIZE.Item1/2, W_SIZE.Item2/10 *9, 0, 0, 180);
 
+            // Scale the background to have the same dimensions as the Window,
+            // then position it at the center of the screen
+            Background backgroundImage = new Background("./asteroid/assets/space.png", W_SIZE.Item1, W_SIZE.Item2, W_SIZE.Item1/2, W_SIZE.Item2/2);
+
             // Create the Start Button
             StartGameButton startGameButton = new StartGameButton("./asteroid/assets/others/start_button.png", 305, 113, W_SIZE.Item1/2, W_SIZE.Item2/2);
 
             // Give actors to cast
+            cast.AddActor("background_image", backgroundImage);
             cast.AddActor("ship", ship);
             cast.AddActor("start_button", startGameButton);
 
@@ -83,6 +88,8 @@ namespace asteroid
             // Add all update actions
             script.AddAction("update", new MoveActorsAction(1, physicsService));
             script.AddAction("update", new HandleOffscreenAction(1, W_SIZE));
+            script.AddAction("update", new HandleShipAsteroidsCollisionAction(1, physicsService, audioservice));
+            script.AddAction("update", new HandleBulletsAsteroidsCollisionAction(1, physicsService, audioservice));
 
             // Add all output actions
             script.AddAction("output", new DrawActorsAction(1, screenService));
