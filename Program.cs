@@ -107,6 +107,7 @@ namespace asteroid
             script.AddAction("update", new HandleBulletsAsteroidsCollisionAction(1, physicsService, audioservice));
 
             // Add all output actions
+            script.AddAction("output", new PlayBackgroundMusicAction(1, "asteroid/assets/sound/background_music.wav", audioservice));
             script.AddAction("output", new DrawActorsAction(1, screenService));
             script.AddAction("output", new DrawHealthBarAction(1, screenService));
             script.AddAction("output", new DrawScoreAction(1, screenService));
