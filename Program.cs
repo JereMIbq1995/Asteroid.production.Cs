@@ -68,7 +68,7 @@ namespace asteroid
             Background backgroundImage = new Background("./asteroid/assets/space.png", W_SIZE.Item1, W_SIZE.Item2, W_SIZE.Item1/2, W_SIZE.Item2/2);
 
             // Create the Player Score
-            PlayerScore score = new PlayerScore(path:"", width:0, height:0, score:0);
+            PlayerScore score = new PlayerScore(path:"", score:0);
 
             // Create the Start Button
             StartGameButton startGameButton = new StartGameButton("./asteroid/assets/others/start_button.png", 305, 113, W_SIZE.Item1/2, W_SIZE.Item2/2);
@@ -101,6 +101,7 @@ namespace asteroid
             // Add all update actions
             script.AddAction("update", new MoveActorsAction(1, physicsService));
             script.AddAction("update", new HandleOffscreenAction(1, W_SIZE));
+            script.AddAction("update", new HandleShipAboveMotherShipAction(1, W_SIZE));
             script.AddAction("update", new HandleShipAsteroidsCollisionAction(1, physicsService, audioservice));
             script.AddAction("update", new HandleMothershipAsteroidsCollisionAction(1, physicsService, audioservice));
             script.AddAction("update", new HandleBulletsAsteroidsCollisionAction(1, physicsService, audioservice));

@@ -5,7 +5,7 @@ namespace asteroid.cast {
 
         private int score;
 
-        public PlayerScore(string path, int width, int height,
+        public PlayerScore(string path, int width = 0, int height = 0,
                         float x = 0, float y = 0,
                         float vx = 0, float vy = 0,
                         float rotation = 0, float rotationVel = 0,
