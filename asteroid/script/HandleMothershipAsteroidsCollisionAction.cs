@@ -24,7 +24,7 @@ namespace asteroid.script {
 
         public override void execute(Cast cast, Script script, Clock clock, Callback callback) {
             // Grab the mothership from the cast
-            this.mothership = (Mothership) cast.GetFirstActor("mothership");
+            this.mothership = (Mothership?) cast.GetFirstActor("mothership");
 
             // Only worry about collision if mothership actually exists
             if (this.mothership != null) {

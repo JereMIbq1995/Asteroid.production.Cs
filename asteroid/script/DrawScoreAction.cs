@@ -21,7 +21,7 @@ namespace asteroid.script {
             
             // Look for the score actor in the actors list
             if (this.score == null) {
-                this.score = (PlayerScore) cast.GetFirstActor("score");
+                this.score = (PlayerScore?) cast.GetFirstActor("score");
             }
 
             // Draw the score on the screen
