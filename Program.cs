@@ -67,6 +67,9 @@ namespace asteroid
             // then position it at the center of the screen
             Background backgroundImage = new Background("./asteroid/assets/space.png", W_SIZE.Item1, W_SIZE.Item2, W_SIZE.Item1/2, W_SIZE.Item2/2);
 
+            // Create the Player Score
+            PlayerScore score = new PlayerScore(path:"", width:0, height:0, score:0);
+
             // Create the Start Button
             StartGameButton startGameButton = new StartGameButton("./asteroid/assets/others/start_button.png", 305, 113, W_SIZE.Item1/2, W_SIZE.Item2/2);
 
@@ -75,6 +78,7 @@ namespace asteroid
             cast.AddActor("ship", ship);
             cast.AddActor("start_button", startGameButton);
             cast.AddActor("mothership", mothership);
+            cast.AddActor("score", score);
 
             // Create the script
             Script script = new Script();
@@ -103,6 +107,7 @@ namespace asteroid
             // Add all output actions
             script.AddAction("output", new DrawActorsAction(1, screenService));
             script.AddAction("output", new DrawHealthBarAction(1, screenService));
+            script.AddAction("output", new DrawScoreAction(1, screenService));
             script.AddAction("output", new UpdateScreenAction(2, screenService));
 
             // Yo, director, do your thing!
