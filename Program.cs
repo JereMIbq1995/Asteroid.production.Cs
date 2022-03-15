@@ -52,8 +52,16 @@ namespace asteroid
             // Create the cast
             Cast cast = new Cast();
 
+            // Create the mothership
+            Mothership mothership = new Mothership("./asteroid/assets/mother_ship.png", W_SIZE.Item1, (int) (W_SIZE.Item1/ 5.7), //path, width, height
+                                                    W_SIZE.Item1/2, W_SIZE.Item2 - (int)(W_SIZE.Item1/ 5.7)/2,   // x and y
+                                                    0, 0,  // vx and vy
+                                                    0, 0,  // rotation and rotational velocity
+                                                    (int)(W_SIZE.Item1 / 5.7)/2 - 10, 20,  //healthBarYOffset and healthBarHeight
+                                                    50, true); // maxHp and showTextHealth
+            
             // Create the player
-            Ship ship = new Ship("./asteroid/assets/spaceship/spaceship_yellow.png", 70, 50, W_SIZE.Item1/2, W_SIZE.Item2/10 *9, 0, 0, 180);
+            Ship ship = new Ship("./asteroid/assets/spaceship/spaceship_yellow.png", 70, 50, W_SIZE.Item1/2, mothership.GetTopLeft().Item2 - 40, 0, 0, 180);
 
             // Scale the background to have the same dimensions as the Window,
             // then position it at the center of the screen
@@ -66,6 +74,7 @@ namespace asteroid
             cast.AddActor("background_image", backgroundImage);
             cast.AddActor("ship", ship);
             cast.AddActor("start_button", startGameButton);
+            cast.AddActor("mothership", mothership);
 
             // Create the script
             Script script = new Script();
@@ -93,6 +102,7 @@ namespace asteroid
 
             // Add all output actions
             script.AddAction("output", new DrawActorsAction(1, screenService));
+            script.AddAction("output", new DrawHealthBarAction(1, screenService));
             script.AddAction("output", new UpdateScreenAction(2, screenService));
 
             // Yo, director, do your thing!
