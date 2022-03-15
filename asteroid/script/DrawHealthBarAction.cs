@@ -55,7 +55,7 @@ namespace asteroid.script {
                 this.DrawHealthBar(actor);
             }
 
-            // Draw Healthbars for the mothership
+            // Draw Healthbar for the mothership
             this.DrawHealthBar((HasLifeActor?) cast.GetFirstActor("mothership"));
         }
     }
