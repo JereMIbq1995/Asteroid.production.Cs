@@ -18,6 +18,7 @@ namespace asteroid.script
 
         public override void execute(Cast cast, Script script, Clock clock, Callback callback)
         {
+            // If the X (close) button on the top right of game window is clicked, stop the game 
             if (this.screenService.IsQuit()) {
                 callback.OnStop();
             }

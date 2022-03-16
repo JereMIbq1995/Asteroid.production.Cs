@@ -30,8 +30,12 @@ namespace asteroid.script {
 
             // Only move if ship is not null
             if (this.ship != null) {
+                
+                // Get the keysState from the keyboardService
                 Dictionary<int, bool> keysState = keyboardService.GetKeysState(this.keysOfInterest);
-                // Console.WriteLine(keysState[Keys.LEFT]);
+                
+                // Change the velocity to the appropriate value and let MoveActorsAction handle the
+                // actual movement
                 if (keysState[Keys.LEFT]) {
                     this.ship.SetVx(-this.shipMovementVel);
                 }
@@ -45,10 +49,12 @@ namespace asteroid.script {
                     this.ship.SetVy(-this.shipMovementVel);
                 }
 
+                // If none of the LEFT or RIGHT keys are down, x-velocity is 0
                 if (!(keysState[Keys.LEFT] || keysState[Keys.RIGHT])) {
                     this.ship.SetVx(0);
                 }
 
+                // If none of the UP or DOWN keys are down, y-velocity is 0
                 if (!(keysState[Keys.UP] || keysState[Keys.DOWN])) {
                     this.ship.SetVy(0);
                 }

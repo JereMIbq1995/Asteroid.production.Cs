@@ -18,6 +18,7 @@ namespace asteroid.script
 
         public override void execute(Cast cast, Script script, Clock clock, Callback callback)
         {
+            // Actually draw stuff on the screen
             this.screenService.UpdateScreen();
         }
     }

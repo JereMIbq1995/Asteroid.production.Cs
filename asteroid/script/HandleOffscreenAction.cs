@@ -23,6 +23,7 @@ namespace asteroid.script
         {
             this.ship = cast.GetFirstActor("ship");
 
+            // Make sure the ship stays within the game window
             if (this.ship != null) {
                 if (this.ship.GetTopRight().Item1 >= this.windowSize.x) {
                     this.ship.SetX((int)(this.windowSize.x - this.ship.GetWidth()/2));
@@ -39,6 +40,7 @@ namespace asteroid.script
                 }
             }
 
+            // If an asteroid falls out of the game window, just remove it.
             foreach (Actor actor in cast.GetActors("asteroids")) {
                 if (actor.GetX() > this.windowSize.x || actor.GetX() < 0 ||
                     actor.GetY() > this.windowSize.y || actor.GetY() < 0) {

@@ -14,6 +14,7 @@ namespace asteroid.script {
         }
 
         public override void execute(Cast cast, Script script, Clock clock, Callback callback) {
+            // Move and rotate all actors in the cast according to their velocities
             List<Actor> allActors = cast.GetAllActors();
             this.physicsService.MoveActors(allActors);
             this.physicsService.RotateActors(allActors);
