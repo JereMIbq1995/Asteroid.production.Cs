@@ -14,6 +14,13 @@ namespace genie.services.raylib {
         *   - Initialize window
         *   - Set target FPS
         *   - Initialize the circle sectors dictionary
+        *
+        * Input:
+        *   - windowSize: int 2-tuple, example: (600, 800)
+        *   - title: string, the name of the window of the game. Default value is "Genie Game"
+                    But you can change this to something else when you create the object
+                    (example: "Asteroid")
+        *   - fps: int, what frame rate do you want to use? Default is 60.
         ****************************************************************/
         public RaylibScreenService((int, int) windowSize, string title = "Genie Game", int fps = 60) {
             // 

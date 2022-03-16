@@ -2,12 +2,18 @@ using Raylib_cs;
 using System.Numerics;
 
 namespace genie.services.raylib {
-
+    /***************************************************************
+    *   This class encapsulates most things you need to do to check
+    *   for Mouse events.
+    *   Note:
+    *     ButtonDown means whether you're holding the button - opposite of ButtonUp.
+    *     ButtonPressed means whether you just pressed the button once - opposite of ButtonReleased.
+    ****************************************************************/
     class RaylibMouseService {
 
-        // Maps genie mouse buttons to Raylib mouse buttons
-        MouseMap mouseMap;
-        Vector2 mousePosition;
+        // Private member variable
+        private MouseMap mouseMap;      // Maps genie mouse buttons to Raylib mouse buttons
+        private Vector2 mousePosition;  // Current position of the mouse
 
         /*************************************************************************
         * Constructor

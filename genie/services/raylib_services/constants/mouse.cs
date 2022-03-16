@@ -2,6 +2,9 @@ using Raylib_cs;
 
 namespace genie.services.raylib
 {
+    /*
+        This class maps the Genie Mouse values to the Raylib mouse values
+    */
     public class MouseMap
     {
 

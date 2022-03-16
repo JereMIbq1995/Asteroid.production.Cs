@@ -34,11 +34,13 @@ namespace genie {
     **************************************************************/
     public class Director : script.Action.Callback {
 
-        private bool isDirecting;
-        private Cast cast;
-        private Script script;
-        private Clock clock;
+        // Private member variables
+        private bool isDirecting;    //Is the game still going?
+        private Cast cast;           // The current cast of the game
+        private Script script;       // The current script of the game
+        private Clock clock;         // Clock. Holds statistics about time, framerate and other things...
 
+        // Constructor
         public Director() {
             this.isDirecting = true;
             this.cast = new Cast();
@@ -46,6 +48,9 @@ namespace genie {
             this.clock = new Clock();
         }
 
+        /**********************************************************
+        * Start the game given a cast and a script...
+        ***********************************************************/
         public void DirectScene(Cast cast, Script script) {
             
             this.cast = cast;
@@ -67,28 +72,41 @@ namespace genie {
             }
         }
 
+        /**********************************************************
+        * Stop the game loop when called
+        ***********************************************************/
         public override void OnStop()
         {
             this.isDirecting = false;
             throw new StopGameException("Game is stopped.");
         }
 
+        /**********************************************************
+        * This is used when the cast and the script need to be completely
+        * replaced and the game switches to a different scene.
+        * For example, this can be used to move from 1 level of the game
+        * to another.
+        ***********************************************************/
         public override void OnNext(Cast cast, Script script) {
             this.cast = cast;
             this.script = script;
             throw new ChangeSceneException("Changing scene with a new CAST and a new SCRIPT...");
         }
 
+        /**********************************************************
+        * Go through all INPUT actions and execute each one
+        ***********************************************************/
         private void DoInputs() {
-            // Console.WriteLine("Doing inputs...");
             this.clock.Tick();
             foreach (script.Action action in this.script.GetActions("input")) {
                 action.execute(this.cast, this.script, this.clock, this);
             }
         }
 
+        /**********************************************************
+        * Go through all UPDATE actions and execute each one
+        ***********************************************************/
         private void DoUpdates() {
-            // Console.WriteLine("Doing Updates...");
             while (this.clock.IsLagging()) {
                 foreach (script.Action action in this.script.GetActions("update")) {
                     action.execute(this.cast, this.script, this.clock, this);
@@ -97,8 +115,10 @@ namespace genie {
             }
         }
 
+        /**********************************************************
+        * Go through all OUTPUT actions and execute each one
+        ***********************************************************/
         private void DoOutputs() {
-            // Console.WriteLine("Doing outputs...");
             foreach (script.Action action in this.script.GetActions("output")) {
                 action.execute(this.cast, this.script, this.clock, this);
             }

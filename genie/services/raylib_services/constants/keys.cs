@@ -1,6 +1,9 @@
 using Raylib_cs;
 
 namespace genie.services.raylib {
+    /*
+        This class maps the Genie Keys to the Raylib Keys
+    */
     public class KeysMap {
 
         // hold the mapping of genie key to raylib key

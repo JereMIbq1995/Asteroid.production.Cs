@@ -1,6 +1,8 @@
 namespace genie.services {
     /*
-        This class defines a few commonly used colors
+        This class defines a few commonly used colors,
+        as well as the Color class that has the Red, Green,
+        Blue, and Alpha (transparency) attributes.
     */
     public class Color {
         public static Color BLACK = new Color(0,0,0,255);

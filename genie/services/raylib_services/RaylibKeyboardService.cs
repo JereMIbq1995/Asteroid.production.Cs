@@ -1,11 +1,17 @@
 using Raylib_cs;
 
 namespace genie.services.raylib {
-    
+    /***************************************************************
+    *   This class encapsulates most things you need to do to check
+    *   for keyboard events.
+    *   Note:
+    *     KeyDown means whether you're holding the button - opposite of KeyUp.
+    *     KeyPressed means whether you just pressed the button once - opposite of KeyReleased.
+    ****************************************************************/
     class RaylibKeyboardService {
         //The keyboard service has a key map that maps
         // all genie key codes into Raylib key codes
-        KeysMap keysMap;
+        private KeysMap keysMap;
 
         /***************************************************************
         * Constructor
