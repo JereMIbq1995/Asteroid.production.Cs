@@ -91,7 +91,7 @@ namespace genie.services.raylib {
         *   Is actor1 above actor2?
         ****************************************************************/
         public bool IsAbove(Actor actor1, Actor actor2) {
-            return actor1.GetTopLeft().Item2 < actor2.GetTopLeft().Item2; 
+            return (actor1.GetPreviousY() <= (actor2.GetPreviousTopLeft().Item2 - actor1.GetHeight() / 2));
         }
 
         /***************************************************************
@@ -99,21 +99,21 @@ namespace genie.services.raylib {
         ****************************************************************/
         public bool IsBelow(Actor actor1, Actor actor2)
         {
-            return actor1.GetBottomLeft().Item2 > actor2.GetBottomLeft().Item2;
+            return (actor1.GetPreviousY() >= (actor2.GetPreviousBottomLeft().Item2 + actor1.GetHeight() / 2));
         }
 
         /***************************************************************
         *   Is actor1 left of actor2?
         ****************************************************************/
         public bool IsLeftOf(Actor actor1, Actor actor2) {
-            return actor1.GetTopLeft().Item1 < actor2.GetTopLeft().Item1;
+            return (actor1.GetPreviousX() <= (actor2.GetPreviousTopLeft().Item1 - actor1.GetWidth() / 2));
         }
 
         /***************************************************************
         *   Is actor1 right of actor2?
         ****************************************************************/
         public bool IsRightOf(Actor actor1, Actor actor2) {
-            return actor1.GetTopRight().Item1 > actor2.GetTopRight().Item1;
+            return (actor1.GetPreviousX() >= (actor2.GetPreviousBottomRight().Item1 + actor1.GetWidth() / 2));
         }
 
     }

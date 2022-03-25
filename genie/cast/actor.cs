@@ -43,6 +43,10 @@ namespace genie.cast {
 
         private bool flipped;
 
+        // These are used by physics service. Users probably don't need this.
+        private float previousX;
+        private float previousY;
+
 
         // Public methods:
 
@@ -67,6 +71,9 @@ namespace genie.cast {
             this.rotationVel = rotationVel;
 
             this.flipped = flipped;
+
+            this.previousX = x;
+            this.previousY = y;
         }
         
         
@@ -117,6 +124,37 @@ namespace genie.cast {
 
         public void SetY(float y) {
             this.y = y;
+        }
+
+        // GetPrevious data (coordinates and corners of previous frame)
+        public float GetPreviousX()
+        {
+            return this.previousX;
+        }
+
+        public float GetPreviousY()
+        {
+            return this.previousY;
+        }
+
+        public (float, float) GetPreviousTopLeft()
+        {
+            return (this.previousX - this.width / 2, this.previousY - height / 2);
+        }
+
+        public (float, float) GetPreviousTopRight()
+        {
+            return (this.previousX + this.width / 2, this.previousY - height / 2);
+        }
+
+        public (float, float) GetPreviousBottomLeft()
+        {
+            return (this.previousX - this.width / 2, this.previousY + height / 2);
+        }
+
+        public (float, float) GetPreviousBottomRight()
+        {
+            return (this.previousX + this.width / 2, this.previousY + height / 2);
         }
 
         // Set/Get methods for vx and vy
@@ -184,6 +222,8 @@ namespace genie.cast {
 
         // Move functions:
         public void MoveWithVelocity() {
+            this.previousX = this.x;
+            this.previousY = this.y;
             this.x += this.vx;
             this.y += this.vy;
         }
