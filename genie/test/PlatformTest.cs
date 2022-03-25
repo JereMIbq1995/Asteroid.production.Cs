@@ -35,7 +35,7 @@ namespace genie.services.raylib
 
         private void HandleHeroMovementAction(Cast cast) {
             // Grab the hero from the cast
-            Actor hero = cast.GetFirstActor("hero");
+            Actor? hero = cast.GetFirstActor("hero");
 
             // Only move if hero is not null
             if (hero != null)
