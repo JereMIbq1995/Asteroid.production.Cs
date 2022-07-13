@@ -9,6 +9,7 @@ namespace genie.services.raylib
         RaylibKeyboardService keyboardService;
         RaylibMouseService mouseService;
         RaylibScreenService screenService;
+        RaylibGamepadService gamepadService;
         // RaylibAudioService audioService;
         // RaylibPhysicsService physicsService;
 
@@ -17,6 +18,7 @@ namespace genie.services.raylib
             this.keyboardService = new RaylibKeyboardService();
             this.mouseService = new RaylibMouseService();
             this.screenService = new RaylibScreenService((1280, 720), "Services Test", 60);
+            this.gamepadService = new RaylibGamepadService();
         }
 
         /**********************************************************************
@@ -199,6 +201,111 @@ namespace genie.services.raylib
                 Raylib.DrawText("Scroll to pull the small RED dot UP or DOWN", 100, 440, 30, Raylib_cs.Color.RED);
                 Raylib.DrawText("Watch the console for Pressed and Released detection", 100, 480, 30, Raylib_cs.Color.RED);
                 Raylib.DrawText("Watch the console for mouse Movement detection", 100, 520, 30, Raylib_cs.Color.RED);
+                Raylib.EndDrawing();
+            }
+            Raylib.CloseWindow();
+        }
+
+        /**********************************************************************
+        * Test Gamepad services
+        ***********************************************************************/
+        /**********************************************************************
+        * This function test the detection of keys 
+        *   - LEFT, RIGHT, UP, and DOWN.
+        *   - A, D, W, S
+        *   - and J, L, I, K
+        * The first keys group tests the function GetKeysStates()
+        * The second keys group tests the functions IsKeysPressed() and IsKeysReleased()
+        * The third keys group tests the functions IsKeysDown() and IsKeysUp()
+        ***********************************************************************/
+        public void TestGamepadService()
+        {
+
+            while (!screenService.IsQuit())
+            {
+
+                //Testing get keys states:
+                List<int> buttons = new List<int>();
+                buttons.Add(Gamepad.LFL);
+                buttons.Add(Gamepad.LFR);
+                buttons.Add(Gamepad.LFU);
+                buttons.Add(Gamepad.LFD);
+
+                Dictionary<int, bool> buttonssState = gamepadService.GetButtonsState(0, buttons);
+
+                if (buttonssState[Gamepad.LFL])
+                {
+                    Console.WriteLine("LF LEFT is down!");
+                }
+                if (buttonssState[Gamepad.LFR])
+                {
+                    Console.WriteLine("LF RIGHT is down!");
+                }
+                if (buttonssState[Gamepad.LFU])
+                {
+                    Console.WriteLine("LF UP is down!");
+                }
+                if (buttonssState[Gamepad.LFD])
+                {
+                    Console.WriteLine("LF DOWN is down!");
+                }
+
+                //Testing IsKeyPressed(), IsKeyReleased()
+                if (gamepadService.IsButtonPressed(0, Gamepad.RFL))
+                {
+                    Console.WriteLine("RF LEFT is pressed!");
+                }
+                if (gamepadService.IsButtonPressed(0, Gamepad.RFR))
+                {
+                    Console.WriteLine("RF RIGHT is pressed!");
+                }
+                if (gamepadService.IsButtonPressed(0, Gamepad.RFU))
+                {
+                    Console.WriteLine("RF UP is pressed!");
+                }
+                if (gamepadService.IsButtonPressed(0, Gamepad.RFD))
+                {
+                    Console.WriteLine("RF DOWN is pressed!");
+                }
+
+                if (gamepadService.IsButtonReleased(0, Gamepad.RFL) || gamepadService.IsButtonReleased(0, Gamepad.RFR)
+                    || gamepadService.IsButtonReleased(0, Gamepad.RFU) || gamepadService.IsButtonReleased(0, Gamepad.RFD))
+                {
+                    Console.WriteLine("Something key was just released!");
+                }
+
+                //Testing IsKeyDown(), IsKeyUp()
+                // Comment this part out to see clearer result of previous tests
+                if (gamepadService.IsButtonDown(0, Gamepad.L1))
+                {
+                    Console.WriteLine("L1 is down!");
+                }
+                if (gamepadService.IsButtonDown(0, Gamepad.R1))
+                {
+                    Console.WriteLine("R1 is down!");
+                }
+                if (gamepadService.IsButtonDown(0, Gamepad.L2))
+                {
+                    Console.WriteLine("L2 is down!");
+                }
+                if (gamepadService.IsButtonDown(0, Gamepad.R2))
+                {
+                    Console.WriteLine("R2 is down!");
+                }
+
+                if (gamepadService.IsButtonUp(0, Gamepad.L1) && gamepadService.IsButtonUp(0, Gamepad.R1)
+                    && gamepadService.IsButtonUp(0, Gamepad.L2) && gamepadService.IsButtonUp(0, Gamepad.R2))
+                {
+                    Console.WriteLine("L1, R1, L2, R2 are all up!");
+                }
+
+                //All the drawing stuff...
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
+                Raylib.DrawFPS(10, 10);
+                Raylib.DrawText("Press Left Face UP, DOWN, LEFT, or RIGHT and watch the console!", 100, 360, 30, Raylib_cs.Color.RED);
+                Raylib.DrawText("Press Right Face UP, DOWN, LEFT, or RIGHT and watch the console!", 100, 400, 30, Raylib_cs.Color.RED);
+                Raylib.DrawText("Press L1, R1, L2, or R2 and watch the console!", 100, 440, 30, Raylib_cs.Color.RED);
                 Raylib.EndDrawing();
             }
             Raylib.CloseWindow();
